@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Convert any sentence to Morse code with this interactive and user-friendly web application. Listen to the Morse code as audio too!">
-    <meta name="keywords" content="Morse code converter, text to Morse, Morse translator, online Morse code tool, Morse code audio">
-    <meta name="author" content="Your Name">
+    <meta name="description" content="Convert text to Morse code or Morse code to text with this interactive web application. Listen to the Morse code as audio too!">
+    <meta name="keywords" content="Morse code converter, text to Morse, Morse translator, online Morse code tool, Morse code audio, Morse to text">
+    <meta name="author" content="Manaf SULTAN">
     <meta name="robots" content="index, follow">
     <title>Morse Code Converter</title>
     <link rel="stylesheet" href="style.css">
@@ -18,50 +18,43 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#contact">Contact</a></li>
             </ul>
+            <label class="theme-switch" title="Toggle Dark/Light Theme">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
         </nav>
     </header>
 
     <main>
         <section id="converter" class="container">
-            <h1>Text to Morse Code Converter</h1>
-            <p>Enter your sentence below and convert it to Morse code instantly! You can also listen to the Morse code.</p>
-            <textarea id="input-text" placeholder="Type your sentence here..."></textarea>
+            <h1>Text ↔ Morse Code Converter</h1>
+            <p>Enter your sentence below to convert it to Morse code or enter Morse code to convert it to text!</p>
+            <textarea id="input-text" placeholder="Type your text or Morse code here..."></textarea>
             <button id="convert-btn">Convert</button>
             <button id="play-pause-btn">Play Morse Code</button>
-            <button id="copy-btn">Copy Morse Code</button>
+            <button id="copy-btn">Copy Output</button>
             <div id="output-container">
-                <h3>Morse Code Output:</h3>
+                <h3>Output:</h3>
                 <pre id="output-text"></pre>
             </div>
         </section>
 
         <section id="about" class="container">
             <h2>About</h2>
-            <p>This tool allows you to easily convert any text into Morse code and listen to it. It's perfect for learning Morse code or creating fun messages.</p>
+            <p>This tool allows you to easily convert text to Morse code and vice versa. You can also listen to the Morse code as audio.</p>
         </section>
 
         <section id="features" class="container">
             <h2>Features</h2>
             <ul>
-                <li>Real-time conversion of text to Morse code.</li>
+                <li>Convert text to Morse code or Morse code to text.</li>
                 <li>Listen to the generated Morse code as audio with Play/Pause functionality.</li>
-                <li>Copy the generated Morse code to your clipboard.</li>
+                <li>Copy the output to your clipboard.</li>
                 <li>User-friendly interface with responsive design.</li>
                 <li>Supports uppercase, lowercase, numbers, and common punctuation marks.</li>
+                <li>Dark theme for better readability in low-light environments.</li>
             </ul>
-        </section>
-
-        <section id="contact" class="container">
-            <h2>Contact</h2>
-            <p>Have questions or suggestions? Feel free to reach out!</p>
-            <form action="#" method="POST">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
         </section>
     </main>
 
