@@ -7,6 +7,12 @@ const morseCodeMap = {
     '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', ' ': '/'
 };
 
+// Reverse Morse Code Mapping
+const reverseMorseCodeMap = Object.entries(morseCodeMap).reduce((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+}, {});
+
 let isPlaying = false; // Track play/pause state
 let currentSymbolIndex = 0; // Track current symbol being played
 let timeoutId = null; // Store the timeout ID for pausing
@@ -17,6 +23,13 @@ function textToMorse(text) {
         .split('') // Split into individual characters
         .map(char => morseCodeMap[char] || '') // Map each character to its Morse code
         .join(' '); // Join with spaces for readability
+}
+
+// Convert Morse Code to Text
+function morseToText(morseCode) {
+    return morseCode.split(' ') // Split by spaces
+        .map(symbol => reverseMorseCodeMap[symbol] || '') // Map each symbol to its character
+        .join(''); // Join without spaces
 }
 
 // Play Morse Code Audio
@@ -77,12 +90,10 @@ document.getElementById('play-pause-btn').addEventListener('click', () => {
     }
 
     if (isPlaying) {
-        // Pause playback
         clearTimeout(timeoutId);
         isPlaying = false;
         document.getElementById('play-pause-btn').textContent = 'Play Morse Code';
     } else {
-        // Resume or start playback
         isPlaying = true;
         document.getElementById('play-pause-btn').textContent = 'Pause Morse Code';
         playMorseCode(outputText);
@@ -92,11 +103,22 @@ document.getElementById('play-pause-btn').addEventListener('click', () => {
 // Convert Button
 document.getElementById('convert-btn').addEventListener('click', () => {
     const inputText = document.getElementById('input-text').value.trim();
-    if (inputText) {
+    if (!inputText) {
+        alert('Please enter some text or Morse code!');
+        return;
+    }
+
+    const hasSpaces = inputText.includes(' ');
+    const hasSpecialChars = /[^\w\s.-]/.test(inputText);
+
+    if (hasSpaces && !hasSpecialChars) {
+        // Assume input is Morse code
+        const englishText = morseToText(inputText);
+        document.getElementById('output-text').textContent = englishText;
+    } else {
+        // Assume input is text
         const morseCode = textToMorse(inputText);
         document.getElementById('output-text').textContent = morseCode;
-    } else {
-        alert('Please enter some text!');
     }
 });
 
@@ -105,11 +127,17 @@ document.getElementById('copy-btn').addEventListener('click', () => {
     const outputText = document.getElementById('output-text').textContent;
     if (outputText) {
         navigator.clipboard.writeText(outputText).then(() => {
-            alert('Morse code copied to clipboard!');
+            alert('Output copied to clipboard!');
         }).catch(err => {
             console.error('Failed to copy:', err);
         });
     } else {
-        alert('No Morse code to copy!');
+        alert('No output to copy!');
     }
+});
+
+// Dark Theme Toggle
+document.getElementById('theme-toggle').addEventListener('change', () => {
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.toggle('light-theme');
 });
