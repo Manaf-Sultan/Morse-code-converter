@@ -8,11 +8,20 @@
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f9;
-    color: #333;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+body.dark-theme {
+    background-color: #222;
+    color: #fff;
 }
 
 header {
@@ -60,34 +69,39 @@ header {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background: white;
+    background: var(--container-bg);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3 {
-    color: #007BFF;
+    color: var(--heading-color);
 }
 
 textarea, button, input, pre {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
+    background: var(--input-bg);
+    color: var(--input-text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button {
-    background: #007BFF;
-    color: white;
+    background: var(--button-bg);
+    color: var(--button-text-color);
     border: none;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
-    background: #0056b3;
+    background: var(--button-hover-bg);
+    color: var(--button-hover-text-color);
 }
 
 #output-container {
@@ -95,17 +109,64 @@ button:hover {
 }
 
 #output-text {
-    white-space: pre-wrap; /* Ensures text wraps while preserving spaces */
-    word-wrap: break-word; /* Breaks long words if necessary */
-    overflow-wrap: break-word; /* Alternative property for better compatibility */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-left: 20px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #007BFF;
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
 }
 
 footer {
     text-align: center;
     padding: 1rem 0;
-    background: #333;
-    color: white;
+    background: var(--footer-bg);
+    color: var(--footer-text-color);
     margin-top: auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (max-width: 768px) {
